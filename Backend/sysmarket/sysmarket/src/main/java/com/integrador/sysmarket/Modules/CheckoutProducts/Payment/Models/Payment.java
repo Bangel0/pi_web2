@@ -1,47 +1,34 @@
 package com.integrador.sysmarket.Modules.CheckoutProducts.Payment.Models;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-
-
-/**
- * @author Whoami
- * @Description This class refers to the table Payments, one that stores sll the payments made in the app<p>
- * Have Getters,Setters and AllArgsConstructor by using Lombook
- * @Attrib {id} Long -  Autoincrement-PrimaryKey
- * @Attrib {paysxOrder} int - Foreign Key ()
- * @Attrib {paymentMethod} int - Foreign Key()
- * @Attrib {amount} float - Refers the amount payed
- * @Attrib {Status} boolean - Refers the status of the payment 
- * @Attrib {Date} Date - Refers the date of the payment
- */
-@Entity
-@Table(name = "Payments")
-@Getter @Setter
-@AllArgsConstructor  
 public class Payment {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false)
-    private Long id;
-    
-    //private int paysxOrder;
 
-    //private int paymentMethod;
+    private static final Logger logger = LoggerFactory.getLogger(Payment.class);
 
-    @NotBlank(message = "No valid ammount")
-    @Column(name="amount",nullable = false)
-    private float amount;
+    private Long paymentId;
+    private Double amount;
 
-    private boolean status;
+    public Payment(Long paymentId, Double amount) {
+        this.paymentId = paymentId;
+        this.amount = amount;
+        logger.info("A new payment was created with id={} and amount={}", paymentId, amount);
+    }
 
-    private Date date;
+    public void processPayment() {
+        try {
+            logger.debug("Processing payment with id={}...", paymentId);
 
-    
+           
+            if (amount <= 0) {
+                throw new IllegalArgumentException("The amount cannot be zero or negative");
+            }
+
+            logger.info(" Payment with id={} processed successfully", paymentId);
+
+        } catch (Exception e) {
+            logger.error(" Error while processing payment with id={}: {}", paymentId, e.getMessage());
+        }
+    }
 }

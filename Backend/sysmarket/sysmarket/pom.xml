@@ -83,6 +83,19 @@
             <version>3.1.1</version>
         </dependency>
 	</dependencies>
+	<!-- filepath: pom.xml -->
+	<!-- ...existing code... -->
+	<dependency>
+   			<groupId>jakarta.servlet</groupId>
+    		<artifactId>jakarta.servlet-api</artifactId>
+   			<version>6.0.0</version>
+    		<scope>provided</scope>
+	</dependency>
+	<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-web</artifactId>
+	</dependency>
+<!-- ...existing code... -->
 
 	<build>
 		<plugins>

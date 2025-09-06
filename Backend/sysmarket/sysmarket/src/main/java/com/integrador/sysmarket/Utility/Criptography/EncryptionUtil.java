@@ -11,6 +11,7 @@ import java.util.Base64;
 
 
 public class EncryptionUtil{
+    
     private static final int IV_SIZE=12;
     private static final int TAG_SIZE=512;
     private static final int KEY_SIZE=256;
@@ -88,3 +89,4 @@ public class EncryptionUtil{
     }
 
 }
+
